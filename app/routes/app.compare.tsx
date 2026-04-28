@@ -4,9 +4,24 @@ import { authenticate } from "../shopify.server";
 import { ComparePageShippingmethods as comparisonData } from "../config";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { Link } from "react-router";
+import db from "../db.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  await authenticate.admin(request);
+  const { admin, session } = await authenticate.admin(request);
+  const shop = session.shop; 
+
+  try {
+    await db.shop.updateMany({
+      where: { 
+        shop_domain: shop,
+        onboarding_seen: false 
+      },
+      data: { onboarding_seen: true },
+    });
+    console.log("DB Update Success for:", shop);
+  } catch (e) {
+    console.error("DB Update Failed:", e);
+  }
   return null;
 };
 

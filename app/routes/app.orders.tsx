@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { Link, useLoaderData } from "react-router";
+import db from "../db.server";
 
 function getDateString(daysAgo = 0) {
   const date = new Date();
@@ -10,7 +11,21 @@ function getDateString(daysAgo = 0) {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const { admin } = await authenticate.admin(request);
+  const { admin, session } = await authenticate.admin(request);
+  const shop = session.shop; 
+
+  try {
+    await db.shop.updateMany({
+      where: { 
+        shop_domain: shop,
+        onboarding_seen: false 
+      },
+      data: { onboarding_seen: true },
+    });
+    console.log("DB Update Success for:", shop);
+  } catch (e) {
+    console.error("DB Update Failed:", e);
+  }
 
   const thirtyDaysAgo = getDateString(30);
 
@@ -150,9 +165,7 @@ const styles = {
     display: "flex" as const,
     justifyContent: "space-between" as const,
     alignItems: "center" as const,
-    marginBottom: 16,
     paddingBottom: 12,
-    borderBottom: "1px solid #E5E7EB",
   },
   shipmentId: {
     fontSize: 14,
@@ -289,7 +302,6 @@ export default function AppShipments() {
     if (order.node.fulfillments && order.node.fulfillments.length > 0) {
       order.node.fulfillments.forEach((fulfillment: any, idx: number) => {
         if (fulfillment.trackingInfo) {
-          console.log(order.node);
           shipments.push({
             id: `${order.node.id}-${idx}`,
             orderName: order.node.name,
@@ -302,7 +314,6 @@ export default function AppShipments() {
           });
         }
       });
-      console.log("shipments",shipments);
     }
   });
 

@@ -3,91 +3,74 @@ import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { Link } from "react-router";
 
-import { redirect, type ActionFunctionArgs } from "react-router";
-import db from "../db.server";
-import { useSubmit } from "react-router";
-
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
   return null;
 };
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const { session } = await authenticate.admin(request);
-  const formData = await request.formData();
-  const redirectTo = formData.get("redirectTo") as string;
-
-  await db.shop.update({
-    where: { shop_domain: session.shop }, 
-    data: { onboarding_seen: true },
-  });
-
-  return redirect(redirectTo);
-};
-
 export default function Index() {
-  const submit = useSubmit();
-
-  const handleOnboardingComplete = (destination: string) => {
-    submit({ redirectTo: destination }, { method: "post" });
-  };
-
   return (
     <div
       style={{
         fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
-        maxWidth:"420px",
+        maxWidth: "420px",
         padding: "16px",
         margin: "0 auto",
         boxSizing: "border-box",
-        borderTop:'none',
-        borderRadius:'0 0 15px 15px',
-        background:'#ffffff',
+        borderRadius: "0 0 15px 15px",
+        background: "#ffffff",
         textAlign: "center",
       }}
     >
       {/* Check icon */}
-      <div style={{padding:'10px 0 16px'}}>
-      <div
-        style={{
-          width: 50,
-          height: 50,
-          borderRadius: "50%",
-          background: "#DCFCE7",
-          display: 'grid',
-        placeItems: 'center',
-        margin: '0 auto 10px',
-        }}
-      >
-
-        <svg style={{width:'30px',height:'30px'}} viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>
+      <div style={{ padding: "10px 0 16px" }}>
+        <div
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: "50%",
+            background: "#DCFCE7",
+            display: "grid",
+            placeItems: "center",
+            margin: "0 auto 10px",
+          }}
+        >
+          <svg
+            style={{ width: "30px", height: "30px" }}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16A34A"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 12 2 2 4-4"></path>
           </svg>
-      </div>
+        </div>
 
-      {/* Heading */}
-      <h1
-        style={{
-          fontSize: 16,
-          fontWeight: 700,
-          color: "#111",
-          margin: "0 0 0.5rem",
-        }}
-      >
-        Welcome to Prime Scale
-      </h1>
-      <p
-        style={{
-          fontSize: 12,
-          color: "#6B7280",
-          lineHeight: 1.6,
-        }}
-      >
-        Your China fulfillment partner — 6—10 day worldwide delivery
-        <br />
-        from Shenzhen &amp; Ningbo
-      </p>
-
+        {/* Heading */}
+        <h1
+          style={{
+            fontSize: 16,
+            fontWeight: 700,
+            color: "#111",
+            margin: "0 0 0.5rem",
+          }}
+        >
+          Welcome to Prime Scale
+        </h1>
+        <p
+          style={{
+            fontSize: 12,
+            color: "#6B7280",
+            lineHeight: 1.6,
+          }}
+        >
+          Your China fulfillment partner — 6—10 day worldwide delivery
+          <br />
+          from Shenzhen &amp; Ningbo
+        </p>
       </div>
 
       {/* Action cards */}
@@ -99,70 +82,61 @@ export default function Index() {
           marginBottom: "1.25rem",
         }}
       >
-        <div
-        onClick={() => handleOnboardingComplete("/app/orders")}
+        <Link
+          to="/app/orders"
           style={{
             background: "#F0FDF4",
             border: "1.5px solid #BBF7D0",
             borderRadius: 12,
             padding: "14px 8px",
-            cursor: "pointer",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textDecoration: "none",
-          }}>
+          }}
+        >
+          <div style={{ fontSize: "20px", marginBottom: "4px" }}>📦</div>
+          <span style={{ fontSize: 11, fontWeight: 600, color: "#16a34a" }}>Track orders</span>
+        </Link>
 
-          <div style={{fontSize:'20px',marginBottom:'4px'}}>📦</div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#16a34a" }}>
-            Track orders
-          </span>
-        </div>
-        
-        <div
-        onClick={() => handleOnboardingComplete("/app/compare")}
+        <Link
+          to="/app/compare"
           style={{
             background: "#EFF6FF",
             border: "1.5px solid #BFDBFE",
             borderRadius: 12,
             padding: "14px 8px",
-            cursor: "pointer",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textDecoration: "none",
-          }}>
+          }}
+        >
+          <div style={{ fontSize: "20px", marginBottom: "4px" }}>⚡</div>
+          <span style={{ fontSize: 11, fontWeight: 600, color: "#1E40AF" }}>Compare speeds</span>
+        </Link>
 
-          <div style={{fontSize:'20px',marginBottom:'4px'}}>⚡</div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#1E40AF" }}>
-            Compare speeds
-          </span>
-        </div>
-
-        <div
-        onClick={() => handleOnboardingComplete("/app/support")}
+        <Link
+          to="/app/support"
           style={{
             background: "#FFF7ED",
             border: "1.5px solid #FED7AA",
             borderRadius: 12,
             padding: "14px 8px",
-            cursor: "pointer",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textDecoration: "none",
-          }}>
-
-          <div style={{fontSize:'20px',marginBottom:'4px'}}>💬</div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#C2410C" }}>
-            Get a quote
-          </span>
-        </div>
+          }}
+        >
+          <div style={{ fontSize: "20px", marginBottom: "4px" }}>💬</div>
+          <span style={{ fontSize: 11, fontWeight: 600, color: "#C2410C" }}>Get a quote</span>
+        </Link>
       </div>
 
       {/* WhatsApp button */}
-      <a
-        href="https://wa.me/31853332376"
+      
+      <a href="https://wa.me/31853332376"
         target="_blank"
         rel="noreferrer"
         style={{
@@ -193,20 +167,19 @@ export default function Index() {
       <div style={{ borderTop: "1px solid #F3F4F6", margin: "12px 0" }}></div>
 
       {/* Explore link */}
-      <div
-        onClick={() => handleOnboardingComplete("/app/home")}
-      className="explore-link" 
-      style={{
+      <Link
+        to="/app/home"
+        style={{
           color: "#6B7280",
           fontSize: 13,
           display: "inline-flex",
           alignItems: "center",
           gap: 6,
           textDecoration: "none",
-          cursor: "pointer",
-        }}>
-        Explore the app first <span className="arrow">{"\u2192"}</span>
-      </div>
+        }}
+      >
+        Explore the app first <span>{"\u2192"}</span>
+      </Link>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { HomePageDeliverySpeed as shippingMethods } from "../config";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, type ActionFunctionArgs, redirect} from "react-router";
 import db from "../db.server";
 
 const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
@@ -17,6 +17,7 @@ function getDateString(daysAgo = 0) {
 
 // Helper: Fetch all pages with pagination
 async function fetchAllOrders(admin: any, dateFilter: string) {
+
   let allOrders: any[] = [];
   let cursor: string | null = null;
   let hasNextPage = true;
@@ -48,7 +49,6 @@ async function fetchAllOrders(admin: any, dateFilter: string) {
 
     const json = await response.json();
     const data = json.data;
-    console.log("DEBUG: Orders fetched in this batch:", data?.orders?.edges?.length || 0);
 
     if (!data?.orders) break;
     const orders = data.orders.edges.map((e: any) => e.node);
@@ -102,6 +102,19 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { admin, session } = await authenticate.admin(request);
   const shop = session.shop; 
 
+  try {
+    await db.shop.updateMany({
+      where: { 
+        shop_domain: shop,
+        onboarding_seen: false 
+      },
+      data: { onboarding_seen: true },
+    });
+    console.log("DB Update Success for:", shop);
+  } catch (e) {
+    console.error("DB Update Failed:", e);
+  }
+
   const shopData = await db.shop.findUnique({
     where: { shop_domain: session.shop },
     select: { install_date: true },
@@ -133,7 +146,7 @@ export default function AppHome() {
 
   const stats = [
     {
-      label: "Orders with tracking",
+      label: "Orders shipped by PSF",
       value: sinceInstallCount.toString(),
       badge: "Since you joined",
       badgeColor: "#1D4ED8",

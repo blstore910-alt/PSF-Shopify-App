@@ -31,3 +31,6 @@ CREATE TABLE "Shop" (
 
     CONSTRAINT "Shop_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Shop_shop_domain_key" ON "Shop"("shop_domain");
