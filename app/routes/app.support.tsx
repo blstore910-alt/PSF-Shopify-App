@@ -54,6 +54,57 @@ function InfoRow({
     </div>
   );
 }
+const styles = {
+  supportCard: {
+    background: "#F9FAFB",
+    border: "1px solid #E5E7EB",
+    borderRadius: "10px",
+    marginBottom: "12px",
+    overflow: "hidden",
+  },
+
+  supportRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    padding: "12px 14px",
+    borderBottom: "1px solid #F3F4F6",
+  },
+
+  supportIcon: {
+    width: "32px",
+    height: "32px",
+    flexShrink: 0,
+    background: "white",
+    border: "1px solid #E5E7EB",
+    borderRadius: "8px",
+    display: "grid",
+    placeItems: "center",
+    fontSize: "15px",
+  },
+
+  supportContent: {
+    flex: 1,
+    minWidth: 0,
+  },
+
+  supportKey: {
+    fontSize: "10px",
+    fontWeight: "700",
+    color: "#6B7280",
+    textTransform: "uppercase",
+    letterSpacing: ".04em",
+    marginBottom: "2px",
+  },
+
+  supportVal: {
+    fontSize: "12px",
+    fontWeight: "600",
+    color: "#111827",
+    lineHeight: "1.35",
+    wordBreak: "break-word",
+  },
+};
 
 export default function AppSupport() {
   const [whatsappHovered, setWhatsappHovered] = useState(false);
@@ -88,28 +139,35 @@ export default function AppSupport() {
         anything related to your shipments.
       </div>
 
-      <div
-        style={{
-          background: "#F9FAFB",
-          border: "1px solid #E5E7EB",
-          borderRadius: "12px",
-          padding: "8px 12px",
-          marginBottom: "20px",
-        }}
-      >
-        <InfoRow
-          label="Response time"
-          value="Within 2 hours"
-          valueColor="#059669"
-        />
-        <InfoRow label="Languages" value="EN · NL · + any language" />
-        <InfoRow label="Support hours" value="Mon–Sat, 08:00–22:00" />
-        <InfoRow
-          label="Setup fee"
-          value="None"
-          valueColor="#059669"
-          isLast={true}
-        />
+      <div style={styles.supportCard}>
+        <div style={styles.supportRow}>
+          <div style={styles.supportIcon}>💬</div>
+          <div style={styles.supportContent}>
+            <div style={styles.supportKey}>Channels</div>
+            <div style={styles.supportVal}>WhatsApp · Telegram · Phone</div>
+          </div>
+        </div>
+        <div style={styles.supportRow}>
+          <div style={styles.supportIcon}>🌍</div>
+          <div style={styles.supportContent}>
+            <div style={styles.supportKey}>Languages</div>
+            <div style={styles.supportVal}>EN · NL · + any language</div>
+          </div>
+        </div>
+        <div style={styles.supportRow}>
+          <div style={styles.supportIcon}>🕐</div>
+          <div style={styles.supportContent}>
+            <div style={styles.supportKey}>Support hours</div>
+            <div style={styles.supportVal}>Mon–Sat, 08:00–22:00</div>
+          </div>
+        </div>
+        <div style={styles.supportRow}>
+          <div style={styles.supportIcon}>📦</div>
+          <div style={styles.supportContent}>
+            <div style={styles.supportKey}>Coverage</div>
+            <div style={styles.supportVal}>USA · EU · UK · AU and more</div>
+          </div>
+        </div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -144,12 +202,7 @@ export default function AppSupport() {
           </button>
         </a>
 
-        <a
-          style={{ textDecoration: "none" }}
-          href="https://wa.me/31853332376?text=Hi%2C%20I%27d%20like%20to%20send%20a%20sourcing%20request"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Link to={'/app/source'} style={{textDecoration:'none',color:'inherit'}}>
           <button
             onMouseEnter={() => setSourcingHovered(true)}
             onMouseLeave={() => setSourcingHovered(false)}
@@ -170,10 +223,10 @@ export default function AppSupport() {
               transition: "background 0.2s",
             }}
           >
-            <WhatsAppIcon color="#16a34a" />
-            Send a sourcing request
+            <svg width="20" height="20" viewBox="0 0 24 24" style={{fill:'#16A34A'}}><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Source a product
           </button>
-        </a>
+        </Link>
 
         <div
           style={{
@@ -184,7 +237,6 @@ export default function AppSupport() {
             alignItems: "center",
             gap: "14px",
             border: "1px solid #E0E7FF",
-            marginBottom: "12px",
           }}
         >
           <div
@@ -209,64 +261,21 @@ export default function AppSupport() {
             <div
               style={{ fontSize: "16px", fontWeight: "800", color: "#1E40AF" }}
             >
-              +31 62 191 7932
+              +31 6 21 91 79 32
             </div>
             <div style={{ fontSize: "11px", color: "#60A5FA" }}>
-              No WhatsApp? Call or message on Telegram · iMessage
+              No WhatsApp? Call or message on Telegram 
             </div>
           </div>
         </div>
 
         <div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "700",
-              color: "#1E293B",
-              marginBottom: "8px",
-            }}
-          >
-            Enjoying the app?
-          </div>
-          
-          <a
-          style={{ textDecoration: "none" }}
-          href="https://apps.shopify.com/prime-scale-china-fulfillment/reviews"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button
-            onMouseEnter={() => setReviewHovered(true)}
-            onMouseLeave={() => setReviewHovered(false)}
-            style={{
-              width: "100%",
-              padding: "14px",
-              background: "#FFFBEB",
-              border: "2px solid #F59E0B",
-              borderRadius: "10px",
-              color: "#92400E",
-              fontWeight: "700",
-              fontSize: "14px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              marginBottom: "8px",
-            }}
-          >
-            <span style={{ color: "#92400E" }}>
-              ★ Leave a review on the App Store
-            </span>
-          </button>
-          </a>
-          
+                   
           <div
             style={{
               textAlign: "center",
-              marginTop: "24px",
               fontSize: "11px",
-              color: "#D1D5DB",
+              color: "#9CA3AF",
             }}
           >
             primescalefulfillment.com

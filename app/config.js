@@ -7,8 +7,8 @@ export const HomePageDeliverySpeed = [
     textColor: "#166534",
   },
   {
-    name: "CJ Dropshipping",
-    range: "12–20 days",
+    name: "Platform agents",
+    range: "10–20 days",
     color: "#f59e0b",
     width: "52%",
     textColor: "#92400e",
@@ -40,9 +40,9 @@ export const ComparePageShippingmethods = [
   },
   {
     method: "PSF Express",
-    usa: "5–8d",
+    usa: "6–10d",
     europe: "6–10d",
-    uk: "5–9d",
+    uk: "6–10d",
     type: "good",
   },
 ];

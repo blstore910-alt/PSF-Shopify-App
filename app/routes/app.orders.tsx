@@ -299,34 +299,23 @@ export default function AppShipments() {
   // Transform orders into shipments
   const shipments: Shipment[] = [];
   orders.forEach((order: any) => {
-    if (order.node.fulfillments && order.node.fulfillments.length > 0) {
-      order.node.fulfillments.forEach((fulfillment: any, idx: number) => {
-        if (fulfillment.trackingInfo) {
+    const node = order.node;
+    if (node.fulfillments && node.fulfillments.length > 0) {
+      node.fulfillments.forEach((fulfillment: any, idx: number) => {
+        const tracking = fulfillment.trackingInfo?.[0]; 
           shipments.push({
-            id: `${order.node.id}-${idx}`,
-            orderName: order.node.name,
-            trackingNumber: fulfillment.trackingInfo[0].number || "—",
-            carrier: fulfillment.trackingInfo[0].company || "—",
-            destination: order.node.shippingAddress?.country || "Unknown",
+            id: `${fulfillment.id}-${idx}`,
+            orderName: node.name,
+            trackingNumber: tracking?.number || "—",
+            carrier: tracking?.company || "—",
+            destination: node.shippingAddress?.country || "Unknown",
             status: fulfillment.displayStatus,
-            createdAt: fulfillment.createdAt || order.node.createdAt,
-            trackingUrl: fulfillment.trackingInfo[0].url,
+            createdAt: fulfillment.createdAt || node.createdAt,
+            trackingUrl: tracking?.url,
           });
-        }
       });
     }
   });
-
-  const totalShipments = shipments.length;
-  const deliveredShipments = shipments.filter(
-    (s) => s.status === "FULFILLED"
-  ).length;
-  const inTransitShipments = shipments.filter(
-    (s) => s.status === "IN_PROGRESS"
-  ).length;
-  const processingShipments = shipments.filter(
-    (s) => s.status === "ON_HOLD"
-  ).length;
 
 
   const formatDate = (dateString: string) => {
@@ -371,7 +360,7 @@ export default function AppShipments() {
                   <label style={styles.label}>TRACKING</label>
                   {shipment.trackingUrl ? (
                     <a
-                      href={shipment.trackingUrl}
+                      href={`https://www.17track.net/en/track?nums=${shipment.trackingNumber}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -426,33 +415,6 @@ export default function AppShipments() {
           <p>Shipments will appear here as orders are fulfilled and shipped.</p>
         </div>
       )}
-    </div>
-  );
-}
-
-interface StatCardProps {
-  label: string;
-  value: string | number;
-  change: string;
-}
-
-function StatCard({ label, value, change }: StatCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div
-      style={{
-        ...styles.statCard,
-        ...(isHovered && styles.statCardHover),
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div style={styles.statLabel}>{label}</div>
-      <div style={styles.statValue}>{value}</div>
-      <div style={{ fontSize: 12, color: "#059669", marginTop: 8 }}>
-        {change}
-      </div>
     </div>
   );
 }

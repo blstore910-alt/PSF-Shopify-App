@@ -135,8 +135,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 const features = [
   "Shenzhen & Ningbo warehouses — worldwide shipping",
   "Quality control on every shipment before dispatch",
-  "Dedicated account manager — same day response",
-  "No setup fees — go live in 24 hours",
+  "Dedicated account manager ",
+  "Worldwide delivery — USA, EU, UK, AU and more",
 ];
 
 export default function AppHome() {
@@ -327,7 +327,7 @@ export default function AppHome() {
             fontStyle: "italic",
           }}
         >
-          Typical times based on publicly available data. Shorter = faster.
+          Typical times based on publicly available data.
         </p>
       </div>
 
@@ -386,8 +386,7 @@ export default function AppHome() {
             lineHeight: 1.5,
           }}
         >
-          Send us a product link on WhatsApp. We source it, quote it, and have
-          you live in 24 hours.
+          Send us a product link on WhatsApp. We'll quote it and walk you through next steps.
         </p>
 
         <a
@@ -420,16 +419,11 @@ export default function AppHome() {
             }}
           >
             <WhatsAppIcon />
-            Get a free quote on WhatsApp
+            Get a quote on WhatsApp
           </button>
         </a>
 
-        <a
-          style={{ textDecoration: "none" }}
-          href="https://wa.me/31853332376?text=Hi%2C%20I%27d%20like%20to%20request%20a%20sourcing%20quote"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Link to={'/app/source'} style={{textDecoration:'none',color:'inherit'}}>
           <button
             onMouseEnter={() => setSourcingHovered(true)}
             onMouseLeave={() => setSourcingHovered(false)}
@@ -451,10 +445,10 @@ export default function AppHome() {
               letterSpacing: "-0.2px",
             }}
           >
-            <WhatsAppIcon color="#16a34a" />
-            Request a sourcing quote
+            <svg width="20" height="20" viewBox="0 0 24 24" style={{fill:'#16A34A'}}><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Source a product
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );

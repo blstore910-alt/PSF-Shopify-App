@@ -67,9 +67,7 @@ export default function Index() {
             lineHeight: 1.6,
           }}
         >
-          Your China fulfillment partner — 6—10 day worldwide delivery
-          <br />
-          from Shenzhen &amp; Ningbo
+          Your China fulfillment partner — Shenzhen &amp; Ningbo warehouses
         </p>
       </div>
 
@@ -117,7 +115,7 @@ export default function Index() {
         </Link>
 
         <Link
-          to="/app/support"
+          to="/app/source"
           style={{
             background: "#FFF7ED",
             border: "1.5px solid #FED7AA",
@@ -161,7 +159,7 @@ export default function Index() {
 
       {/* Subtext */}
       <p style={{ fontSize: 12, color: "#9ca3af", margin: "0 0 1.5rem" }}>
-        No setup fees · Start in 24 hours · No commitment
+        Tracking · Quality control · Dedicated account manager
       </p>
 
       <div style={{ borderTop: "1px solid #F3F4F6", margin: "12px 0" }}></div>

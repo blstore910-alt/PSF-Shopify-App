@@ -28,8 +28,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 const psfFeatures = [
   "Quality control on every shipment before it leaves",
   "Full tracking from warehouse to customer door",
-  "Dedicated account manager — responds same day",
-  "No setup fees — go live in 24 hours",
+  "Dedicated account manager ",
   "Worldwide delivery — USA, EU, UK, AU and more",
 ];
 
@@ -204,7 +203,7 @@ export default function AppCompare() {
           }}
         >
           <WhatsAppIcon color="#fff" />
-          Switch to PSF — message us now
+          Get a quote on WhatsApp
         </button>
       </a>
     </div>
