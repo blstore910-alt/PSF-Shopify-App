@@ -79,8 +79,6 @@ interface Shipment {
 const styles = {
   container: {
     fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
-    // minHeight: "100vh",
-    maxWidth: "420px",
     padding: "16px",
     margin: "0 auto",
     boxSizing: "border-box" as const,

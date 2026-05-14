@@ -47,8 +47,6 @@ export default function AppCompare() {
     <div
       style={{
         fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
-        // minHeight: "100vh",
-        maxWidth: "420px",
         padding: "16px",
         margin: "0 auto",
         boxSizing: "border-box",

@@ -1,6 +1,7 @@
 // app/components/CustomNavbar.tsx
 import { Link, useLocation } from "react-router";
 import logo from "../assets/App_Icon.png";
+import '../styles/global.css';
 
 export function CustomNavbar() {
   const location = useLocation();
@@ -18,7 +19,6 @@ export function CustomNavbar() {
   return (
     <div
       style={{
-        width: "420px",
         margin: "10px auto 0",
         fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
       }}
@@ -65,15 +65,7 @@ export function CustomNavbar() {
       </div>
       {location.pathname !== '/app' && <>
       <div
-            style={{
-            display: "flex",
-            padding: "0 8px",
-            background: "#243541",
-            borderBottom: "1px solid #e8ecf0",
-            position: "sticky",
-            top: 0,
-            zIndex: 10,
-            }}
+        className="custom_navbar"
             >
                 <Link to="/app/home" style={navItemStyle("/app/home")}>
                 Home

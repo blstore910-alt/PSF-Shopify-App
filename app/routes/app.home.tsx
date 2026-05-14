@@ -165,7 +165,6 @@ export default function AppHome() {
     <div
       style={{
         fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif",
-        maxWidth: "420px",
         padding: "16px",
         margin: "0 auto",
         boxSizing: "border-box",

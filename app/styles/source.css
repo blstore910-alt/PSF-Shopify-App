@@ -1148,3 +1148,10 @@
   top: 100px !important;
   bottom: auto !important;
 }
+
+
+@media screen and (max-width: 380px) {
+  .region-picker {
+    grid-template-columns: 1fr 1fr;
+  }
+}

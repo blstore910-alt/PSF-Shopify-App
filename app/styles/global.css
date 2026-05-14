@@ -1,0 +1,29 @@
+body {
+    max-width:420px;
+    margin:0 auto;
+}
+
+@media screen and (max-width: 450px) {
+  body {
+    max-width: calc(100vw - 35px) !important;
+    margin: 0 auto 0 18px !important;
+  }
+}
+
+.custom_navbar {
+  display: flex;
+  padding: 0px 8px;
+  background: #243541;
+  border-bottom: 1px solid rgb(232, 236, 240);
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+@media screen and (max-width: 350px) {
+  .custom_navbar {
+    padding: 0px 0px;
+    & > a {
+      padding: 8px 7px 7px !important; 
+    }
+  }
+}
