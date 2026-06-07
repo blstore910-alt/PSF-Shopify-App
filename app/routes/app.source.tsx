@@ -80,7 +80,7 @@ export default function AppSource() {
     }
 
     let lines = [];
-    lines.push("Hi Prime Scale, I'd like a sourcing quote:");
+    lines.push("Hi Prime Scale, I'd like a quote:");
     lines.push("");
     lines.push("Product: " + product);
     lines.push("Quantity: " + quantity + " units");
@@ -137,12 +137,12 @@ export default function AppSource() {
           </div>
           <div className="source-hero-content">
             <div className="hero-badge">
-              <span className="hero-dot"></span>SOURCING
+              <span className="hero-dot"></span>REQUEST
             </div>
             <div className="hero-title">
-              Source any product
+              Request a quote
               <br />
-              from China.
+              from your team.
             </div>
             <div className="hero-sub">
               Quote in hours · Quality controlled · Worldwide shipping
@@ -189,25 +189,6 @@ export default function AppSource() {
           </div>
         </div>
 
-        {/* <!-- Source platforms pills --> */}
-        <div className="source-platforms">
-          <div className="sp-label">We source from</div>
-          <div className="sp-pills">
-            <span className="sp-pill">
-              <span className="sp-pill-dot orange"></span>Alibaba
-            </span>
-            <span className="sp-pill">
-              <span className="sp-pill-dot red"></span>1688
-            </span>
-            <span className="sp-pill">
-              <span className="sp-pill-dot orange"></span>AliExpress
-            </span>
-            <span className="sp-pill">
-              <span className="sp-pill-dot blue"></span>Factories
-            </span>
-          </div>
-        </div>
-
         {/* <!-- Process steps --> */}
         <div className="process-steps">
           <div className="step">
@@ -251,7 +232,7 @@ export default function AppSource() {
               </svg>
             </div>
             <div>
-              <div className="form-card-title">New sourcing request</div>
+              <div className="form-card-title">New quote request</div>
               <div className="form-card-sub">Fill in the details below</div>
             </div>
           </div>
@@ -430,18 +411,18 @@ export default function AppSource() {
         )}
         </div>
 
-        {/* <!-- What we source --> */}
+        {/* <!-- How we help --> */}
         <div className="source-features">
-          <div className="sf-title">What we can source</div>
+          <div className="sf-title">How we help</div>
           <div className="sf-grid">
             <div className="sf-card">
               <div className="sf-icon-wrap green">
-                <span>🔍</span>
+                <span>💬</span>
               </div>
               <div className="sf-text">
-                <div className="sf-name">Any product</div>
+                <div className="sf-name">Quick quotes</div>
                 <div className="sf-desc">
-                  Alibaba, 1688, AliExpress or any factory
+                  Reply within hours from your account manager
                 </div>
               </div>
             </div>
