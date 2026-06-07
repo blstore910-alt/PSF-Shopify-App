@@ -77,7 +77,7 @@ export function CustomNavbar() {
                 Compare
                 </Link>
                 <Link to="/app/source" style={navItemStyle("/app/source")}>
-                Source
+                Request
                 </Link>
                 <Link to="/app/support" style={navItemStyle("/app/support")}>
                 Support
